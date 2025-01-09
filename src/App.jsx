@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import ProductList from './ProductList';
 import './App.css';
@@ -7,39 +6,51 @@ import AboutUs from './AboutUs';
 function App() {
   
   const [showProductList, setShowProductList] = useState(false);
+  const [showCart, setShowCart] = useState(false); // Add state for cart visibility
 
   const handleGetStartedClick = () => {
     setShowProductList(true);
+    setShowCart(false); // Ensure cart is hidden when showing products
+  };
+
+  const handleShowCartClick = () => {
+    setShowCart(true);
+    setShowProductList(false); // Hide products when showing the cart
   };
 
   return (
     <div className="app-container">
-      <div className={`landing-page ${showProductList ? 'fade-out' : ''}`}>
+      <div className={`landing-page ${showProductList || showCart ? 'fade-out' : ''}`}>
         <div className="background-image"></div>
         <div className="content">
-         <div className="landing_content">
-         <h1>Welcome To Paradise Nursery</h1>
-          <div className="divider"></div>
-          <p>Where Green Meets Serenity</p>
-         
-          <button className="get-started-button" onClick={handleGetStartedClick}>
-            Get Started
-          </button>
-         </div>
+          <div className="landing_content">
+            <h1>Welcome To Paradise Nursery</h1>
+            <div className="divider"></div>
+            <p>Where Green Meets Serenity</p>
+            <button className="get-started-button" onClick={handleGetStartedClick}>
+              Get Started
+            </button>
+          </div>
           <div className="aboutus_container">
-          <AboutUs/>
+            <AboutUs />
           </div>
-          </div>
-
+        </div>
       </div>
       <div className={`product-list-container ${showProductList ? 'visible' : ''}`}>
         <ProductList />
       </div>
+
+      {/* Add a cart section or button */}
+      <div className={`cart-container ${showCart ? 'visible' : ''}`}>
+        {/* Cart component or content goes here */}
+        <h2>Your Cart</h2>
+        {/* Add cart items here */}
+      </div>
+      <button className="show-cart-button" onClick={handleShowCartClick}>
+        View Cart
+      </button>
     </div>
   );
 }
 
 export default App;
-
-
-
