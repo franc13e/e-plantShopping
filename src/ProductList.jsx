@@ -1,10 +1,13 @@
-import React, { useState,useEffect } from 'react';
-import './ProductList.css'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem } from '../redux/actions/cartActions'; // Adjust the path to your Redux actions
+import './ProductList.css';
 import CartItem from './CartItem';
+
 function ProductList() {
     const [showCart, setShowCart] = useState(false); 
-    const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
-    const [addedToCart, setAddedToCart] = useState({}); //State to track which products are added to cart
+    const dispatch = useDispatch();
+    const cartItems = useSelector((state) => state.cart.items); // Adjust based on your state structure
 
     const plantsArray = [
         {
@@ -299,7 +302,7 @@ const handlePlantsClick = (e) => {
 
         </div>
  ) :  (
-    <CartItem onContinueShopping={handleContinueShopping}/>
+    <CartItem cartItems={cartItems} onContinueShopping={handleContinueShopping}/>
 )}
     </div>
     );
