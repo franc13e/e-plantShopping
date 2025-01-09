@@ -253,7 +253,10 @@ const handlePlantsClick = (e) => {
         ...prevState,
         [product.name]: true, //Set the product name as key and value as true to indicate it's added to cart
     }));
-  }
+  };
+  const handleCheckoutShopping = (e) => {
+    alert('Functionality to be added for future reference');
+  };
     return (
         <div>
              <div className="navbar" style={styleObj}>
